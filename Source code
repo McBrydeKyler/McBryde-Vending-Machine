@@ -1,0 +1,164 @@
+import java.util.Scanner;
+
+public class McBrydeKylerVendingMachine {
+
+	public static void main(String[] args) {
+		
+		// Declare Constants
+		final double POP_TARTS_PRICE = 0.90;
+		final double PRETZEL_PRICE = 0.70;
+		final double FUNYUN_PRICE = 1.50;
+		double sum = 0;
+		int poptartCount = 0;
+		int pretzelCount = 0;
+		int funyunCount = 0;
+		// Start scanner
+		Scanner input = new Scanner(System.in);
+		
+		boolean inService = true;
+		
+		while (inService) {
+			
+		//Display menu that shows the vending machine and snacks
+		System.out.print("\n");	
+		System.out.println("**********************************");
+		System.out.println("          Snack Machine      ");
+		System.out.println("**********************************");
+		System.out.println(" Pop Tart   Pop Tart     Pop Tart ");
+		System.out.printf(" 1A: %.2f   1B: %.2f     1C: %.2f %n", POP_TARTS_PRICE, POP_TARTS_PRICE, POP_TARTS_PRICE);
+		System.out.println("------------------------------------");
+		System.out.println(" Pretzels   Pretzels     Pretzels ");
+		System.out.printf(" 2A: %.2f   2B: %.2f     2C: %.2f %n", PRETZEL_PRICE, PRETZEL_PRICE, PRETZEL_PRICE);
+		System.out.println("------------------------------------");
+		System.out.println("  Funyun     Funyun      Funyun");
+		System.out.printf(" 3A: %.2f   3B: %.2f     3C: %.2f %n", FUNYUN_PRICE, FUNYUN_PRICE, FUNYUN_PRICE);
+		System.out.println("------------------------------------");
+		
+		//Prompt user to enter how many snacks they want
+		System.out.println("How many snacks would you like ? You have a limit of 3 snacks");
+		
+		int userSnackNumber = input.nextInt();
+		
+		//While the snack selection is greater than 3 or less than 1 print out invalid entry
+		while ((userSnackNumber > 3 || userSnackNumber < 1) && userSnackNumber != 999 ) {
+			
+			System.out.println("INVALID ENTRY. ENTER A NUMBER BETWEEN 1 AND 3. ");
+		//Create the user snack selection input
+			userSnackNumber = input.nextInt();
+		
+		}// End while loop for user snack selection
+		
+		//Shutdown process
+		if (userSnackNumber == 999) {
+	
+			System.out.println("Enter shutdown password:");
+			String shutdownPasscode = input.next();
+						
+			
+			if (shutdownPasscode.equals("COOKIES")) {
+				inService = false;
+				
+				System.out.println("SHUTDOWN PROCESSING");
+				
+				
+			}
+			
+			
+		}
+		
+		else {
+			
+			System.out.println("Enter snack selection: ");
+			
+			for (int i = 0; i < userSnackNumber; i ++ ) {
+				
+				String userSnackSelection = input.next().toUpperCase();
+				
+				//Chack the length of this if statement. 
+				if (userSnackSelection.length() == 2) {
+				
+					// Character between A-C 65-68	
+					if((userSnackSelection.charAt(1) >= 'A' && userSnackSelection.charAt(1) <= 'C') && (userSnackSelection.charAt(0) >= '1' && 
+							userSnackSelection.charAt(0) <= '3') ) {
+						
+						// Create the receipt for the selections here.
+						 System.out.println("----------------------");
+						 System.out.println("----------" + "*" + userSnackSelection + "*" + "-----------");
+						 System.out.println("----------------------");
+						 System.out.println();
+						 	
+						char snackNumber = userSnackSelection.charAt(0);
+						
+						
+						if (snackNumber == '1') {
+							
+							System.out.println("Snack Item: Pop Tart");
+							System.out.printf("Snack price:  %.2f ", POP_TARTS_PRICE);
+							sum += POP_TARTS_PRICE;
+							 poptartCount++; 
+							
+						}// end of snackNumber if
+							
+							else if (snackNumber == '2') {
+								
+								System.out.println("Snack Item: Pretzels");
+								System.out.printf("Snack price:  %.2f " , PRETZEL_PRICE);
+								sum += PRETZEL_PRICE;
+								pretzelCount++;
+							}
+							
+							else if (snackNumber == '3') {
+								
+								System.out.println("Snack Item: Funyuns");
+								System.out.printf("Snack price:  %.2f " , FUNYUN_PRICE);
+								sum += FUNYUN_PRICE;
+								funyunCount++;
+							}
+						
+						//Thank you 
+						System.out.println("\n");
+						System.out.println("\n-------------------------------");
+						System.out.println("Thank You For Your Business! :)");
+						System.out.println("-------------------------------");
+						
+					}// Close inner if statement
+					
+					// Make sure the input is between the parameters given
+					else {
+						
+						i--;
+						System.out.println("Invalid User Input Please Enter 1A-1C, 2A-2C or 3A-3C:");
+						System.out.println(userSnackSelection);
+						
+					}// Close else
+					
+				}// Close outer else statement 
+				
+				// Make sure you cant continue with more than 2 characters
+				else {
+					
+					i--;
+					System.out.println("Invalid User Input Please Enter 1A-1C, 2A-2C or 3A-3C:");
+					
+				}// Close else statement
+			
+			}
+		input.nextLine();
+		
+		}// Close for loop		
+		
+		}// while in service
+	
+		System.out.println("\n");
+		System.out.println("Total Sales: "+ sum);//Total sales
+		System.out.println("Total Number Of Snacks Sold: " + (poptartCount + pretzelCount + funyunCount));// Total number of snacks sold
+		System.out.println("Poptart:" + poptartCount  );//Total number for each snack sold
+		System.out.println("Pretzel:"+  pretzelCount );
+		System.out.println("Funyun:"+  funyunCount );
+		
+		// End Scanner input
+		input.close();
+		
+	}// Main
+
+	}// Public Class
